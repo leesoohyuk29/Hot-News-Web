@@ -1,4 +1,6 @@
-# weibo-hotsearch-web
+# Hot News Web
+
+### 一个获取微博热搜的前端项目
 
 ## Project setup
 ```
