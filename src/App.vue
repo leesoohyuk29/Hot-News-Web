@@ -1,9 +1,9 @@
 <template>
-  <hotNews msg="Welcome to Your Vue.js App"/>
+  <hotNews/>
 </template>
 
 <script>
-import hotNews from './components/hotNews.vue'
+import hotNews from './hotNews/index.vue'
 
 export default {
   name: 'App',
@@ -20,6 +20,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 30px;
+  width: 60vw;
+  margin: 30px auto;
 }
 </style>
