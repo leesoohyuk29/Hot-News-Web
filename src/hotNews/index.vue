@@ -26,6 +26,8 @@ export default {
       { name: "tt", label: "头条" },
       { name: "hp", label: "虎扑" },
       { name: "zh", label: "知乎" },
+      { name: "xhs", label: "小红书" },
+      { name: "blbl", label: "哔哩哔哩" },
       { name: "bd", label: "百度" },
     ]);
 
