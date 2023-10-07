@@ -39,7 +39,7 @@ export default {
 
     function initData(name) {
       newsLoading.value = true;
-      fetch(`http://localhost:3000/hotList?name=${encodeURIComponent(name)}`)
+      fetch(`https://www.mutoo.asia?name=${encodeURIComponent(name)}`)
         .then(response => response.json())
         .then(data => {
           newsLoading.value = false;
