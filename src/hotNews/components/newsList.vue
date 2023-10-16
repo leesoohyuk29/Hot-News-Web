@@ -1,6 +1,6 @@
 <template>
-  <div class="hot-news">
-    <el-table :data="tableData" :show-header="false" v-loading="newsLoading" class="news-table">
+  <div class="hot-news" v-loading="newsLoading">
+    <el-table :data="tableData" :show-header="false" class="news-table">
       <el-table-column type="index" width="60"></el-table-column>
       <el-table-column prop="text" label="标题" min-width="260">
         <template #default="{ row }">
