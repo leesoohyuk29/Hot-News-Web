@@ -116,7 +116,7 @@ export default {
 }
 .hot-value {
   font-size: 12px;
-  width: 6%;
+  width: 9%;
 }
 h3 {
   margin: 40px 0 0;
