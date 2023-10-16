@@ -46,7 +46,7 @@ export default {
 
     function initData(name) {
       newsLoading.value = true;
-      fetch(`https://hotnewsserver.mutoo.asia?name=${encodeURIComponent(name)}`)
+      fetch(`https://hotnewsserver.mutoo.asia/hotList?name=${encodeURIComponent(name)}`)
         .then(response => response.json())
         .then(data => {
           newsLoading.value = false;
