@@ -29,7 +29,7 @@ export default {
 @media screen and (max-width: 768px) {
   #app {
     width: 90vw;
-    margin: 20px auto;
+    margin: 10px auto;
   }
 }
 </style>

@@ -1,12 +1,12 @@
 <template>
-  <div class="hot-news" v-loading="newsLoading">
+  <div class="hot-news" v-loading="newsLoading" element-loading-text="Loading...">
     <el-table v-if="tableData.length" :data="tableData" :show-header="false" class="news-table">
       <el-table-column v-if="!isMobile" type="index" width="60"></el-table-column>
       <el-table-column prop="text" label="标题" min-width="260">
         <template #default="{ row }">
           <span class="column-box">
             <span @click="goLink(row.link)" class="title-box">
-              <img v-if="row.icon" :src="imgUrl(row.icon)" alt="" class="title-icon">
+              <img v-if="row.icon" :src="row.icon" alt="" class="title-icon">
               {{ row.text }}
             </span>
             <span v-if="!isMobile" class="hot-value">{{ row.hotValue }}</span>
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { ref, watch, computed, onMounted, onUnmounted } from 'vue';
+import { ref, watch, computed, nextTick } from 'vue';
 
 export default {
   name: 'HotNews',
@@ -47,6 +47,7 @@ export default {
     function initData(name) {
       newsLoading.value = true;
       fetch(`https://hotnewsserver.mutoo.asia?name=${encodeURIComponent(name)}`)
+      // fetch(`http://localhost:3000/hotList?name=${encodeURIComponent(name)}`)
         .then(response => response.json())
         .then(data => {
           newsLoading.value = false;
@@ -54,6 +55,11 @@ export default {
           // 清空热搜度为空的数据；
           // 热搜数据可能没有热度值，只是一个关键字如’热‘综艺’，这些多是广告也屏蔽掉
           tableData.value = data.filter(item => item.hotValue.trim() !== '' && item.hotValue.trim().length > 2);
+          // 更新数据后重置滚动条
+          nextTick(() => {
+            const container = document.querySelector('.news-table');
+            container.scrollTop = 0;
+          });
         })
         .catch(error => {
           newsLoading.value = false;
@@ -66,24 +72,11 @@ export default {
       window.open(link);
     }
 
-    function imgUrl(icon) {
-      if (icon.includes('https:https://')) {
-        icon = icon.replace("https:https:", "https:");
-      }
-      return icon;
-    }
-
-    onMounted(() => {});
-
-    // 在组件销毁时清空定时器
-    onUnmounted(() => {});
-
     return {
       newsLoading,
       tableData,
       isMobile,
-      goLink,
-      imgUrl
+      goLink
     };
   }
 };
@@ -116,7 +109,7 @@ export default {
 }
 .hot-value {
   font-size: 12px;
-  width: 6%;
+  width: 8%;
 }
 h3 {
   margin: 40px 0 0;
