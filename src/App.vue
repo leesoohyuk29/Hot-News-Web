@@ -24,3 +24,12 @@ export default {
   margin: 30px auto;
 }
 </style>
+<!-- 移动端适配 -->
+<style>
+@media screen and (max-width: 768px) {
+  #app {
+    width: 90vw;
+    margin: 20px auto;
+  }
+}
+</style>
