@@ -69,7 +69,8 @@ export default {
 
     function goLink(link) {
       if (link.includes("javascript:void(0)")) return this.$message.error("链接异常！");
-      window.open(link);
+      // 移动端在当前窗口打开页面，pc端在新窗口打开页面
+      isMobile.value ? window.location.href = link : window.open(link);
     }
 
     onMounted(() => {
