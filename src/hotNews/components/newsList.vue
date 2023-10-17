@@ -1,5 +1,5 @@
 <template>
-  <div class="hot-news" v-loading="newsLoading" element-loading-text="Loading...">
+  <div ref="listRef" class="hot-news" v-loading.fullscreen.lock="newsLoading" element-loading-text="Loading...">
     <el-table v-if="tableData.length" :data="tableData" :show-header="false" class="news-table">
       <el-table-column v-if="!isMobile" type="index" width="60"></el-table-column>
       <el-table-column prop="text" label="标题" min-width="260">
@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { ref, watch, computed, nextTick } from 'vue';
+import { ref, watch, computed, nextTick, onMounted } from 'vue';
 
 export default {
   name: 'HotNews',
@@ -29,6 +29,7 @@ export default {
   setup(props) {
     const newsLoading = ref(false);
     const tableData = ref([]);
+    const listRef = ref(null);
 
     // 判断是否在移动端（这里使用窗口宽度小于等于768px作为判断条件）
     const isMobile = computed(() => {
@@ -56,7 +57,7 @@ export default {
           tableData.value = data.filter(item => item.hotValue.trim() !== '' && item.hotValue.trim().length > 2);
           // 更新数据后重置滚动条
           nextTick(() => {
-            const container = document.querySelector('.news-table');
+            const container = document.querySelector('.hot-news');
             container.scrollTop = 0;
           });
         })
@@ -71,10 +72,17 @@ export default {
       window.open(link);
     }
 
+    onMounted(() => {
+      if (listRef.value) {
+        listRef.value.style.height = `${window.innerHeight - 120}px`;
+      }
+    });
+
     return {
       newsLoading,
       tableData,
       isMobile,
+      listRef,
       goLink
     };
   }
@@ -83,10 +91,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.hot-news {
+  width: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+}
 .news-table {
   width: 100%;
-  height: 1200px;
-  overflow-y: auto;
 }
 .column-box {
   display: flex;
