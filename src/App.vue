@@ -21,7 +21,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   width: 60vw;
-  margin: 30px auto;
+  margin: 10px auto;
 }
 </style>
 <!-- 移动端适配 -->
