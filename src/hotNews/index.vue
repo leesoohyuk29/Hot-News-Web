@@ -5,6 +5,7 @@
         v-for="(item, index) in tabPanes"
         :key="index"
         :label="item.label"
+        :disabled="['zh', 'xhs', 'blbl'].includes(item.name)"
         :name="item.name"
         ></el-tab-pane>
     </el-tabs>
@@ -25,10 +26,10 @@ export default {
       { name: "wb", label: "微博" },
       { name: "bd", label: "百度" },
       { name: "hp", label: "虎扑" },
+      { name: "tt", label: "头条" },
       { name: "zh", label: "知乎" },
       { name: "xhs", label: "小红书" },
       { name: "blbl", label: "哔哩哔哩" },
-      { name: "tt", label: "头条" },
     ]);
 
     const handleClick = (tab) => {
